@@ -1,0 +1,25 @@
+<div class="main-center-block">
+  <h1>Список користувачів</h1>
+  <hr>  
+
+  <div id="users_list">
+    <%= render @users %>
+    <%= paginate @users, remote: true %>
+  </div>
+</div>  
+
+<div class="main-right-block">
+  <div class="right-block">
+    <h1>Пошук</h1>
+    <hr>  
+    <%= form_tag admin_users_path, :method => :put, remote: true, class: 'search-block', enforce_utf8: false do %>
+      <%= text_field_tag :search_user, params[:search_user], class: 'form-control', onkeyup: "$(this.form).submit();", placeholder: 'Найти кристувача' %>
+    <% end %>
+  </div>
+
+  <div class="right-block">
+    <h1>Добавити</h1>
+    <hr>  
+    <%= image_tag 'add' %><%= link_to 'Добавити користувача', new_admin_user_path, class: 'add-product' %>
+  </div>
+</div>

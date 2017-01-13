@@ -1,0 +1,13 @@
+<div class='comment-modal-block' id='modal'>
+  <div class='modal-content'>
+    <h2>Редагувати коментар</h2>
+    <div id="modal_info_block"></div>
+    <%= form_for @comment, url: admin_comment_path(@comment), html: { method: :put }, remote: true do |f| %>
+    <div class='form-group'>
+      <%= f.text_area :content, placeholder: 'Введіть відгук', class: 'form-control', rows: 5 %>
+    </div>
+    <%= f.submit 'Оновити категорію', class: 'btn btn-default' %>
+    <% end %>
+    <%= submit_tag "Закрити", class: 'btn btn-default', onclick: 'close_modal()', id: 'close' %>
+  </div>
+</div>

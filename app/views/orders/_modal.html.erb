@@ -1,0 +1,22 @@
+<div id="modal">
+  <div class="order-content">
+    <h1>Оформлення заказу</h1>    
+    <%= form_for @order, html: { method: :post }, remote: true do |f| %>
+    <div id="info_block"><%= get_error_messages(@order) %></div>
+    <div class="form-group">
+      <%= f.email_field :email, class: 'form-control', placeholder: "Введіть e-mail", value: current_user.try(:email) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :name, class: 'form-control', placeholder: "Введіть імя", value: current_user.try(:name) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :address, class: 'form-control', placeholder: "Введіть адресу" %>
+    </div>
+
+    <a href="" id="close" class="btn btn-default">Закрити</a>
+    <%= f.submit "Оформити заказ", class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>

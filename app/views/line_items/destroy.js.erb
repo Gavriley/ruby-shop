@@ -1,0 +1,8 @@
+$("#line_item_<%= @line_item.id %>").remove()
+
+$("#total_price").html('Загальна ціна: <%= number_to_currency(@cart.total_price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %>')
+
+$('#cart')
+  .html('<%= @cart.total_count %>шт. -  <%= number_to_currency(@cart.total_price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %>')
+  .css({'color':'#efefef'})
+  .animate({'color':'#000'}, 1000);

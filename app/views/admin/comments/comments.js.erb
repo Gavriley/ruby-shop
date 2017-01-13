@@ -1,0 +1,2 @@
+$("#comments_list").html("<%= escape_javascript(render @comments) %>");
+$('#comments_list').append('<%= escape_javascript(paginate @comments, remote: true) %>');

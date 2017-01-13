@@ -1,0 +1,3 @@
+<% if resource.errors.any? %>  
+  $("#info_block").html("<%= get_error_messages(resource) %>");
+<% end %>  

@@ -1,0 +1,35 @@
+<p>
+  <%= "При оплаті заказі №#{@order.id} на суму #{number_to_currency(@order.amount, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u")} сталася помилка" %>
+</p>
+<br>
+<h1 align="center"><%= "Заказ №#{@order.id}" %></h1>
+<hr>
+<table width="100%" style="border-collapse: collapse; border: 1px solid black; margin-top: 15px">
+  <thead>
+    <tr>
+      <th width="35%" style="padding: 5px 0px">Назва товару</th>
+      <th style="padding: 5px 0px">Кількість</th>
+      <th style="padding: 5px 0px">Ціна за од.</th>
+      <th style="padding: 5px 0px">Сума, UAH</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order.line_items.each do |item| %>
+    <tr>
+      <td style="border: 1px solid black; padding: 5px 0px 5px 10px" align="left"><%= item.product.title %></td>
+      <td style="border: 1px solid black; padding: 5px 0px" align="center"><%= item.count %></td>
+      <td style="border: 1px solid black; padding: 5px 0px" align="center">
+        <%= number_to_currency(item.product.price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %>
+      </td>
+      <td style="border: 1px solid black; padding: 5px 0px" align="center">
+        <%= number_to_currency(item.total_price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div style="margin-right: 15px; margin-top: 15px" align="right">
+  <%= "Загальна сума: #{number_to_currency(@order.amount, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u")}" %>
+</div>

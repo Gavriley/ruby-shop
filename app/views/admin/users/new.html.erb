@@ -1,0 +1,45 @@
+<%= form_for @user, url: admin_users_path, html: { multipart: true, method: :post }, remote: true do |f| %>
+<div class="main-center-block">
+  <h1>Створити користувача</h1>
+  <hr>
+  <div class="account-block">
+    <div id="info_block"><%= get_error_messages(@user) %></div>
+    <div class="form-group">
+      <%= f.text_field :login, autofocus: true, placeholder: "Введіть логін", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.email_field :email, placeholder: "Введіть e-mail", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :name, placeholder: "Введіть імя", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Введіть пароль", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= link_to 'До користувачів', admin_users_path, class: 'btn btn-default' %>
+      <%= f.submit 'Створити', class: 'btn btn-default'  %>
+    </div>
+  </div>
+</div>
+<div class="main-right-block">
+  <div class="right-block">
+    <h1>Аватар</h1>
+    <hr>
+    <div id="file_block">
+      <%= image_tag nil, id: 'file_container', style: "display: none" %>
+      <%= f.label :avatar, 'Виберіть аватар', id: 'raper_file', for: 'avatar' %>
+      <%= f.file_field :avatar, id: 'avatar' %>
+      <%= link_to 'Видалити аватар', nil, id: 'clear', style: "display: none", for: "#avatar" %>    
+    </div>
+  </div>
+
+  <div class="right-block">
+    <h1>Група користувача</h1>
+    <hr>
+    <div class="form-group">
+      <%= f.collection_select :role_id, @roles, :id, :title, { selected: 3 }, { class: 'form-control' } %>
+    </div>
+  </div>
+</div>
+<% end %>

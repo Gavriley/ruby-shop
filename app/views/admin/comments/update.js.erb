@@ -1,0 +1,6 @@
+<% if @comment.errors.any? %>  
+  $("#modal_info_block").html("<%= get_error_messages(@comment) %>");
+<% else %>
+  $("#modal_block").html("");
+  $("#comment_list").html("<%= escape_javascript(render @comments) %>");
+<% end %>  

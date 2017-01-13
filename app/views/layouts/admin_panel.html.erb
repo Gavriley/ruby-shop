@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= get_panel_title %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body id="admin_panel">
+  <%= render 'layouts/admin_bar' %>
+
+  <div class="admin-panel-content">
+    <%= render 'layouts/left_admin_menu' %>
+
+    <div class="main-content">
+      <% if notice %>
+        <div id="notice"><%= notice %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>  
+  </div>  
+  <%= javascript_include_tag 'file' %>
+  <%= javascript_include_tag 'modal' %>
+</body>
+</html>

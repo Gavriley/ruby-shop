@@ -1,0 +1,25 @@
+<div class="main-center-block">
+  <h1>Список товарів</h1>
+  <hr>  
+  <div id="products_list">
+    <%= render @products %>
+    <%= paginate @products, remote: true %>
+  </div>
+</div>
+
+<div class="main-right-block">
+  <div class="right-block">
+    <h1>Пошук</h1>
+    <hr>  
+    <%= form_tag admin_products_path, :method => :put, remote: true, class: 'search-block', enforce_utf8: false do %>
+      <%= text_field_tag :search_product, params[:search_product], class: 'form-control', onkeyup: "$(this.form).submit();", placeholder: 'Найти продукт' %>
+    <% end %>
+  </div>
+
+  <div class="right-block">
+    <h1>Добавити</h1>
+    <hr>  
+    <%= image_tag 'add' %><%= link_to 'Добавити товар', new_product_path, class: 'add-product' %>
+  </div>
+</div>
+

@@ -1,0 +1,33 @@
+  <div class="product-item">
+    <span class="action-block">
+      <%= link_to 'Переглянути', product %>  | 
+      <%= link_to 'Редагувати', edit_product_path(product) %> |
+      <%= link_to 'Видалити', admin_product_path(product), method: :delete, data: { confirm: "Ви впевнені?" } %>
+    </span>
+
+    <h2><%= product.title %></h2>
+
+    <% if product.categories.exists? %>
+    <h3>
+      <%= product.categories.count != 1 ? 'Категорії: ' : 'Категорія:' %>
+      <%= product.categories.map { |category| link_to category.name, category }.join(" / ").html_safe %>
+    </h3>
+    <% end %>
+
+    <div class="product-content-block">
+      <%= image_tag product.thumbnail.url(:small) %>  
+      <p><%= truncate(strip_tags(product.description), length: 700) %></p>
+    </div>
+
+    <div class="info-product-block">
+      <span class="product-info">
+        <Автор: <%= product.user.login %> | 
+        Статус: <%= product.published ? "опубліковано" : "закрито" %> | 
+        Дата: <%= product.created_at.strftime("%d").to_s %> 
+        <%= set_month(product.created_at.strftime("%m").to_i) %> 
+        <%= product.created_at.strftime("%Y").to_s %> року> 
+      </span>
+    </div>  
+  </div>
+  
+  

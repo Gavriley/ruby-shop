@@ -1,0 +1,16 @@
+<div class='category-modal-block' id='modal'>
+  <div class='modal-content'>
+    <h2>Редагувати категорію</h2>
+    <div id="modal_info_block"></div>
+    <%= form_for @category, url: admin_category_path(@category), html: { method: :put }, remote: true do |f| %>
+    <div class='form-group'>
+      <%= f.text_field :name, placeholder: 'Введіть назву', class: 'form-control' %>
+    </div>
+    <div class='form-group'>  
+      <%= f.collection_select :parent_id, @categories, :id, :name, { include_blank: 'Батьківська категорія' }, { class: 'form-control' } %>
+    </div>
+    <%= f.submit 'Оновити категорію', class: 'btn btn-default' %>
+    <% end %>
+    <%= submit_tag "Закрити", class: 'btn btn-default', onclick: 'close_modal()', id: 'close' %>
+  </div>
+</div>

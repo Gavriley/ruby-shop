@@ -1,0 +1,44 @@
+  <div class="sidebar">
+    <div class="cart-block">
+      <div class="cart"> 
+        <%= link_to carts_path do %>
+        <%= image_tag('shopping-bag') %>
+        <% end %> 
+        <span id="cart"> 
+          <%= get_params_cart %>
+        </span>
+      </div>
+      <hr>
+    </div>
+    
+    <% if user_signed_in? %>
+    <div class="account">
+      <p>Ви ввійшли як <span><%= current_user.login %></span></p>
+      <hr>
+    </div>
+    <% end %>
+    
+    <% if @categories.any? %>
+    <div class="category-block">
+      <h1>Категорії</h1>
+      <ul id="category_list">
+        <% @categories.each do |category| %>
+        <li>
+          <%= link_to category.name, category %>
+          <% if category.children.exists? %>
+          <span class="float-category" id="listener_<%= category.id %>" value="<%= category.id %>">[+]</span>
+          <% end %>
+        </li>
+        
+        <% if category.children.exists? %>
+        <ul class="nested" id="nested_list_<%= category.id %>">
+          <% category.children.each do |nested_category| %>
+          <li><%= link_to nested_category.name, nested_category %></li>
+          <% end %>
+        </ul>
+        <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+  </div>

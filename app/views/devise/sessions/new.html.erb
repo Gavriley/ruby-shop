@@ -1,0 +1,32 @@
+<div class="main-block">
+  <div class="account-block">
+    <h2>Вхід на сайт</h2>
+    
+    <div class="session-block"> 
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="info-block">
+          <% if flash[:alert] %>
+          <div id="alert"><%= flash[:alert] %></div>
+          <% end %>
+        </div>  
+
+        <div class="form-group">
+         <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Введіть e-mail" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Введіть пароль" %>
+        </div>
+
+        <div class="form-group checkbox">
+          <label><%= f.check_box :remember_me %>Запамятати мене</label>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Ввійти на сайт", class: 'btn btn-default' %>
+          <%= link_to 'Реєстрація', new_registration_path(:user), class: 'btn btn-default', id: 'redirect' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<% if resource.errors.any? %>  
+  $("#info_block").html("<%= get_error_messages(resource) %>");
+<% else %>
+  <% flash[:notice] = "Ваш обліковий запис змінено." %>
+  $("#info_block").html("<%= get_notice %>");
+<% end %>

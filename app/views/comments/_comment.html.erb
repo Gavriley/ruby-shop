@@ -1,0 +1,26 @@
+<div class="comment-content">
+  <%= image_tag comment.user.avatar.url(:comment) %>
+  <div class="comment-info">
+    <span class="author"><%= comment.user.login %></span> 
+    <span class="date">
+      <%= comment.created_at.strftime("%d").to_s %> 
+      <%= set_month(comment.created_at.strftime("%m").to_i) %> 
+      <%= comment.created_at.strftime("%Y").to_s %> року о 
+      <%= comment.created_at.strftime("%H:%M:%S").to_s %>
+    </span>
+
+    
+    <span class="action">
+      <% if can? :update, comment %>
+      <%= link_to 'Редагувати', modal_product_comment_path(@product, comment), method: :put, remote: true %> |
+      <% end %>
+
+      <% if can? :destroy, comment %>
+      <%= link_to 'Видалити', product_comment_path(@product, comment), method: :delete, remote: true %>
+      <% end %>
+    </span>
+    
+
+  </div>
+  <p id="comment_content_<%= comment.id %>"><%= comment.content %></p>
+</div>

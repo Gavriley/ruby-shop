@@ -1,0 +1,11 @@
+<div class="main-center-block">
+  <h1>Список відгуків</h1>
+  <hr>
+
+  <div id="comments_list">
+    <%= render @comments %>
+    <%= paginate @comments, remote: true %>
+  </div>
+
+  <div id="modal_block"></div>
+</div>

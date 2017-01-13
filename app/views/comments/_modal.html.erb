@@ -1,0 +1,15 @@
+<div id="modal">
+  <div class="comment-content">  
+    <div id="info_modal_block"></div>
+    <div class="form-block">
+    <%= form_for @comment, url: product_comment_path(@product, @comment), html: { method: :put }, remote: true do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, class: "form-control", rows: 4, placeholder: "Оновлений відгук" %>
+      </div>
+
+      <%= f.submit "Оновити", class: "btn btn-default", id: 'update_comment' %>
+    <% end %>
+    <%= submit_tag "Закрити", class: 'btn btn-default', onclick: 'close_modal()', id: 'close' %>
+    </div>
+  </div>
+</div>

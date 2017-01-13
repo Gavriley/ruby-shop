@@ -1,0 +1,8 @@
+<% if @comment.errors.any? %>  
+  $("#info_block").html("<%= get_error_messages @comment %>");
+<% else %>  
+  $("#info_block").html("<%= get_notice %>");
+  $("#comments_info").html("<%= get_comment_info @product %>");
+  $("#comment_content").val("");
+  $("#comments_list").html("<%= escape_javascript(render @product.comments.includes(:user).order(created_at: :desc)) %>");
+<% end %>

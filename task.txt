@@ -1,0 +1,172 @@
+/*****************! (19.09.2016) !*****************/
+
+Front-end:
+  + календар вибрати дату публікації посту
+  + галерея
+
+Ruby On Rails 
+  + не використовувати scaffold
+  + звязки між категоріями 
+  + геми для загрузки зображень
+  + добавити до divise поле login
+  + пагінація
+  + пошук
+
+/*****************! Next Task(17.10.2016) !*****************/
+
+Front-end:
+  + модальні вікна для галереї
+  + респонс на галереї
+  + CSS media queries
+  + найти шаблони для блога 
+
+Back-end:
+  + N+1 query(і вирішити проблему в блогах)
+  + настроїти відсилання підтвердження e-mail(gmail smtp)
+  + CanCanCan gem і застосувати його для редагування блогів і статті 
+  + добавити адміністратора
+  + натягнути шаблон  
+  + можливість створювати персональний блог  
+
+/*****************! Next Task(31.10.2016) !*****************/    
+
+Back-end:
+  + eagerloading
+  + enviroment
+  + internet shop (LIQ pay) sandbox = 1
+  + NGROK
+  + StateMachine
+  
+Test:
+  + unit testing controllers and models Rspec(FactoryGirl, Faker, Database Cleaner)
+  
+
+/*****************! Next Task(21.11.2016) !*****************/
+
+Base task: 
+  + "Full text search" Solr or Elestic Search
+  + PayPal 
+  + Stripe  
+  + настроїти AASM 
+    + Записати помилку
+    + Використати Guard
+    + Затестувати Order  
+
+Additional task:
+  + Скролл на меню 
+  + Видалення і зміна кількості товарів
+  + Автовалідація зображення  
+
+Materials:
+  test cart stripe: 4242424242424242  
+
+  pay pal test acount:
+    email: gavrileypetroinsilico@gmail.com
+    pass: testpaypal
+
+  solr: 
+    bundle exec rake sunspot:solr:start
+    bundle exec rake sunspot:solr:reindex
+    bundle exec sunspot-solr start -p  8981
+
+  redis
+    redis-server  
+
+/*****************! Next Task(01.12.2016) !*****************/
+
+email: oleh.demyanyuk@gmail.com
+
+Development:
+  + Ajax Search
+  + Email Callback(to admin and to client)
+  + Check Reindex(create and destroy data) 
+  + Log for payment
+  + Selenium
+  
+  + Gem SideKiq
+  + Gem Timecop
+  + Gem RuboCop
+  + Gem Breakmen
+  + Gem SimpleCow  
+
+Rspec:
+  + Before After  
+
+Additional task:
+  + Session Storage
+
+Question:
+  -> Line items limit 
+  -> Capybara Webkit
+  -> Session carts
+  -> TDD and BDD  
+  -> Capistrano
+  -> Solano CI
+
+Site development: 
+  + pagination
+  + button add product
+  + validation only files  
+  + upload avatar for user
+  + user controller
+  + file not found
+  
+/*****************! Next Task(13.12.2016) !*****************/  
+  
+Development:
+  + send eamil across sidekiq  
+  + fix brakeman
+  * sidekiq Line items limit 
+  + push message
+  + cart from session to cookie
+  + delete carts by sidekiq 
+  + Continuous Integration
+  
+Gem: 
+  + foreman  
+  + server FAYE
+
+Rspec: 
+  + context for order error with line items
+
+Read:
+  + Continuous Integration
+  + Continuous Delivery
+
+Site development:
+  + rewrite registration controller
+  + cancancan
+  + button destroy cart
+  + manager tools
+  + publich products
+  + rewrite controllers
+  + rewrite modal windows
+  + rewrite routes
+
+Additional task:
+  + chrome in full window  
+
+Question:
+  admin cancancan
+  foreman index solr
+
+/*****************! Next Task(27.12.2016) !*****************/  
+
+Tests:
+  ? timecop clean card after one week
+  + Circle CI config ruby version 
+  + test in Postgres or MySQL
+  cover controllers and models
+
+Task: 
+  caspirano(doployed heroku) 
+  + rails server change puma 
+  ? config puma with nginx
+  i18n
+
+Resource:
+  trank.com.ua  
+  rubygarage.github.io
+
+Question: 
+  click in rspec  

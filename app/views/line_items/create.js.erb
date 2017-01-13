@@ -1,0 +1,6 @@
+if($("#notice")) $("#notice").remove();
+
+$('#cart')
+  .html('<%= get_params_cart %>')
+  .css({'color':'#efefef'})
+  .animate({'color':'#000'}, 1000);

@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - db/schema.rb   
+    - 'bin/**/*' 
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/*'
+    - 'test/**/*'
+    - '*'

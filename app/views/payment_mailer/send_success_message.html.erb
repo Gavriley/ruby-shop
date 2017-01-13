@@ -1,0 +1,3 @@
+<p>
+  <%= "Заказ №#{@order.id} на суму #{number_to_currency(@order.amount, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u")} успішно оплачений за допомогою #{@order.pay_with}" %>
+</p>

@@ -1,0 +1,56 @@
+<div class="main-block">  
+  <% if notice %>
+  <div id="notice"><%= notice %></div> 
+  <% end %>
+
+  <div class="order-content">
+    <h1><%= "Заказ №#{@order.id}" %></h1>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="35%">Назва товару</th>
+          <th>Кількість</th>
+          <th>Ціна за од.</th>
+          <th>Сума, UAH</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.line_items.each do |item| %>
+        <tr>
+          <td><%= item.product.title %></td>
+          <td><%= item.count %></td>
+          <td><%= number_to_currency(item.product.price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></td>
+          <td><%= number_to_currency(item.total_price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></td>
+        </tr>
+        <% end %>
+      </tbody>    
+    </table>
+    <div class="total-price">
+      <span>
+        <%= "Загальна сума: #{number_to_currency(@order.amount, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u")}" %>
+      </span>
+    </div> 
+    <hr>
+    <div class="pay-block">
+      <ul>
+        <li><%= @liqpay %></li> 
+        <li>
+          <%= link_to @paypal do %>
+          <%= image_tag 'https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif?akam_redir=1' %>
+          <% end %>
+        </li>  
+        <li>
+          <%= form_tag stripe_response_order_path @order do %>
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= ENV['stripe_publishable_key'] %>"
+              data-description="Оплатіть платіж"
+              data-currency="UAH"
+              data-amount="<%= @order.amount * 100 %>"
+              data-locale="auto"></script>
+          <% end %> 
+        </li>  
+      </ul>   
+    </div>
+  </div>
+</div>  

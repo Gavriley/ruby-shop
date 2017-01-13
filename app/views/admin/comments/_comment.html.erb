@@ -1,0 +1,16 @@
+<div class="comment-item">
+  <div class="action-block">
+    <%= link_to 'Редагувати', modal_admin_comment_path(comment), method: :put, remote: true %> | 
+    <%= link_to 'Видалити', admin_comment_path(comment), method: :delete %>
+  </div>
+  <p>Автор: <%= comment.user.login %></p>
+  <p>Продукт: <%= comment.product.title %></p>
+  <p>Дата: 
+    <%= comment.created_at.strftime("%d").to_s %> 
+    <%= set_month(comment.created_at.strftime("%m").to_i) %> 
+    <%= comment.created_at.strftime("%Y").to_s %> року о 
+    <%= comment.created_at.strftime("%H:%M:%S").to_s %>
+  </p>    
+  <hr>
+  <p><%= comment.content %></p>
+</div>

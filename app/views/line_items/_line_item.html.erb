@@ -1,0 +1,15 @@
+<tr id="line_item_<%= line_item.id %>">
+  <td>
+    <%= link_to line_item.product, target: "_blank" do %>
+    <%= image_tag line_item.product.thumbnail.url(:small) %>
+    <% end %>
+  </td>
+  <td><%= link_to line_item.product.title, line_item.product, target: "_blank" %></span></td>
+  <td><%= number_to_currency(line_item.product.price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></td>
+  <td>
+    <%= link_to '◀', count_down_line_item_path(line_item), method: :patch, remote: true, class: 'arrow' %>
+    <span id="product_count_<%= line_item.id %>"><%= line_item.count %></span> 
+    <%= link_to '▶', count_up_line_item_path(line_item), method: :patch, remote: true, class: 'arrow' %>
+  </td>
+  <td><%= link_to 'Видалити', line_item, method: :delete, remote: true, class: 'destroy_item' %></td>
+</tr>

@@ -1,0 +1,7 @@
+<% if @comment.errors.any? %>  
+  $("#info_modal_block").html("<%= get_error_messages @comment %>");
+<% else %>  
+  $('#modal_block').html("");
+  $("#info_block").html("");
+  $("#comments_list").html("<%= escape_javascript(render @product.comments.includes(:user).order(created_at: :desc)) %>");
+<% end %>

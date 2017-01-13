@@ -1,0 +1,27 @@
+<div class="main-full-block">
+  <h1>Список категорій</h1>
+  <hr>
+  <div class="left-block">
+    <h2>Добавити нову категорію</h2>
+    <div id="info_block"></div>
+    <%= form_for @category, url: admin_categories_path, html: { method: :post }, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.text_field :name, placeholder: "Введіть назву", class: "form-control" %>
+    </div>
+    
+    <div class="form-group" id="categories_list">  
+      <%= f.collection_select :parent_id, @categories, :id, :name, { include_blank: 'Батьківська категорія' }, { class: 'form-control' } %>
+    </div>  
+
+    <div class="form-group">
+      <%= f.submit "Створити категорію", class: "btn btn-default" %>
+    </div>
+    <% end %>
+
+  </div>
+  <div class="right-block" id="right_block">
+    <%= render @categories %>
+  </div>
+
+  <div id="modal_block"></div>
+</div>

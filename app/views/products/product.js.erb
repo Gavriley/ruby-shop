@@ -1,0 +1,7 @@
+<% if notice %>  
+  $("#info_block").html("<%= get_notice %>");
+<% end %>  
+
+<% if @product.errors.any? %>
+  $("#info_block").html("<%= get_error_messages(@product) %>");
+<% end %>  

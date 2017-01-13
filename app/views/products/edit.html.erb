@@ -1,0 +1,89 @@
+<div class="main-block">
+  <div class="product-action-block">
+    <div class="content">
+      <div class="row">
+        <%= form_for @product, html: { multipart: true, method: :put }, remote: true do |f| %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="col-md-8">
+          <h1>
+            Редагувати товар
+            <div class="action-block">
+            <%= link_to 'Переглянути товар', @product %>  
+            </div>
+          </h1>
+          <div id="info_block"><%= get_notice %><%= get_error_messages(@product) %></div>
+
+          <div class="form-group">
+            <%= f.text_field :title, placeholder: "Введіть заголовок", class: "form-control" %>
+          </div>  
+          
+          <div class="form-group">
+            <%= f.text_area :description, placeholder: "Введіть опис продукту", rows: 7, class: "form-control" %>
+          </div>
+          
+          <div class="form-group checkbox">
+            <%= f.label :published do %>
+            <%= f.check_box :published, {}, 'true', 'false' %> <span>Опублікувати товар</span>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "Оновити товар", class: "btn btn-default" %>
+            <%= f.text_field :price, placeholder: "Введіть ціну", class: "form-control price-field" %>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="thumbnail-block">
+            <h2>Мініатюра</h2>
+            <hr>
+            <div id="file_block">
+              <% if @product.thumbnail.exists? %> 
+                <%= image_tag @product.thumbnail.url(:large), id: 'file_container' %>
+                <%= link_to 'Видалити мініатюру', nil, id: 'clear', for: "#thumbnail" %>
+                <%= f.label :thumbnail, 'Виберіть мініатюру', id: 'raper_file', for: 'thumbnail', style: "display:none" %>
+                <%= f.file_field :thumbnail, id: 'thumbnail' %>
+              <% else %>
+                <%= image_tag nil, id: 'file_container', style: "display: none" %>
+                <%= f.label :thumbnail, 'Виберіть мініатюру', id: 'raper_file', for: 'thumbnail' %>
+                <%= f.file_field :thumbnail, id: 'thumbnail' %>
+                <%= link_to 'Видалити мініатюру', nil, id: 'clear', style: "display: none", for: "#thumbnail" %>
+              <% end %>  
+            </div>
+          </div>
+          
+          <div class="category-block">
+            <hr>
+            <h2>Категорії</h2>
+            <ul class="checkbox category-content">  
+              <% @categories.each do |category| %>
+              <li>
+                <label>
+                <%= check_box_tag 'product[category_ids][]', category.id, @product.categories.include?(category) %> 
+                <span><%= category.name %></span>
+                </label>
+                <% if category.children.exists? %>  
+                <ul class="nested-category">
+                  <% category.children.each do |nested_category| %>  
+                    <li>
+                      <label>
+                      <%= check_box_tag 'product[category_ids][]', nested_category.id, @product.categories.include?(nested_category) %> 
+                      <span><%= nested_category.name %></span>
+                      </label>
+                    </li>  
+                  <% end %>
+                </ul>  
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+
+        </div>
+        <% end %>
+      </div>
+    </div>  
+
+  </div>
+</div>

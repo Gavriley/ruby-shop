@@ -1,0 +1,8 @@
+<% if @category.errors.any? %>  
+  $("#modal_info_block").html("<%= get_error_messages(@category) %>");
+<% else %>
+  $("#modal_block").html("");
+  $("#info_block").html("<%= get_alert %>");
+  $(".right-block").html("<%= escape_javascript(render @categories) %>");
+  $('#categories_list').html("<%= escape_javascript(select_tag 'category[parent_id]', options_from_collection_for_select(@categories, :id, :name), include_blank: 'Батьківська категорія', class: 'form-control') %>");
+<% end %>  

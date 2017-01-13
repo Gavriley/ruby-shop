@@ -1,0 +1,29 @@
+  <div class="main-block">
+    <% if notice %>
+    <div id="notice" class="main-notice"><%= notice %></div> 
+    <% end %>
+    <div class="content">
+      <% count = 0 %>  
+      <div class="row">
+      <% @products.each do |product| %>
+      <%= '</div><div class="row">'.html_safe if !count.zero? && (count % 4 == 0) %>
+
+        <div class="col-md-3">
+          <div class="product-item">
+            <%= link_to product_path(product) do %>
+              <%= image_tag product.thumbnail.url(:large) %>  
+            <% end %>  
+            <div class="product-info">
+              <%= link_to product.title, product_path(product) %>
+              <h3><%= number_to_currency(product.price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></h3>
+              <%= link_to 'До корзини', line_items_path(product_id: product), method: :post, remote: true, class: 'button-cart' %>
+            </div>  
+          </div>
+        </div>
+
+      <% count += 1 %>
+      <% end %>
+      </div>
+
+    </div>
+  </div>

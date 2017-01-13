@@ -1,0 +1,10 @@
+<div class="main-center-block">
+  <h1>Список замовлень</h1>
+  <hr>  
+  
+  <div id="orders_list">
+    <%= render @orders %>
+    <%= paginate @orders, remote: true %>
+  </div>
+</div>
+

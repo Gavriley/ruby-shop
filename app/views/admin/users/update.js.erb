@@ -1,0 +1,5 @@
+<% if @user.errors.any? %>
+  $("#info_block").html("<%= get_error_messages(@user) %>");
+<% else %>
+  $("#info_block").html("<%= get_alert %>");
+<% end %>

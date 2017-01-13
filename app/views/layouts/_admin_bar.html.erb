@@ -1,0 +1,26 @@
+  <div class="admin-bar-base">
+    <div class="admin-bar">
+      <div class="admin-bar-container">
+        <div class="left-bar-side">
+          <%= image_tag 'icon-panel.png' %>
+          <%= link_to 'Адмін панель', admin_root_path %>
+        </div>
+        <div class="center-bar-side">
+          <%= image_tag 'icon-home.png' %>
+          <%= link_to 'Головна', root_path %>
+          <%= image_tag 'icon-products.png' %>
+          <%= link_to 'Товари', admin_products_path %>
+          <%= image_tag 'icon-new-product.png' %>
+          <%= link_to 'Добавити товар', new_product_path %>
+          <%= image_tag 'icon-order.png' %>
+          <%= link_to 'Замовлення', admin_orders_path %> <%= get_orders_unverified_count %>
+        </div>
+        <div class="right-bar-side">
+          <%= image_tag 'icon-profile.png' %>
+          <%= link_to "Вітаємо вас, #{current_user.login}", edit_user_registration_path %>
+          <%= image_tag 'icon-logout.png' %>
+          <%= link_to 'Вихід', destroy_user_session_path, method: :delete %>
+        </div>
+      </div>
+    </div>
+  </div>

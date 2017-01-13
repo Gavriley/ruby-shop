@@ -1,0 +1,32 @@
+<div class="main-block">
+  <div class="cart-block">
+    <%= form_for(@cart, html: { method: :delete }) do |f| %>
+    <h1>Корзина <%= submit_tag "Знищити корзину", class: 'btn btn-default destroy-cart' %></h1>
+    <% end %>  
+    
+    <hr class="cart-space">
+    <table>
+      <tr>
+        <th width="15%">Мініатюра</th>
+        <th width="35%">Назва</th>
+        <th width="20%">Ціна</th>
+        <th width="15%">Кількість</th>
+        <th width="15%"></th>
+      </tr>
+      
+      <%= render @cart.line_items %>
+      
+      <tr>
+        <td id="total_price" colspan="5">
+          Загальна ціна: <%= number_to_currency(@cart.total_price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %>
+        </td>
+      </tr>
+    </table>
+    <div class="make-order">
+      <%= link_to "Повернутися до товарів", products_path, class: 'btn btn-default' %>
+      <%= link_to 'Оформити заказ', modal_orders_path, method: :put, remote: true, class: 'btn btn-default', id: 'push_order' %>
+    </div>
+  </div>
+</div>
+
+<div id="modal_block"></div>

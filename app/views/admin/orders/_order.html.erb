@@ -1,0 +1,23 @@
+<div class="order-item" <%= 'id=unverified' if order.unverified %>>
+  <div class="action-block">
+    <%= link_to 'Переглянути', admin_order_path(order) %> | 
+    <%= link_to 'Видалити', admin_order_path(order), method: :delete, data: { confirm: "Ви впевнені?" } %>
+  </div>
+  <p>Імя замовника: <%= order.name %></p>
+  <p>Email замовника: <%= order.email %></p>
+  <p>Адреса замовника: <%= order.address %></p>
+  <% if order.pay_with.present? %>
+  <p>Оплачено за допомогою: <%= order.pay_with %></p>
+  <% end %>
+  <p>Загальна сума замовлення: <%= number_to_currency(order.amount, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></p>
+  <p>
+    Статус: <span class="<%= order.aasm.current_state %>"><%= get_ukr_order_state(order.aasm.current_state.to_s) %></span>
+    <%= order.get_last_error %>
+  </p>
+  <p>
+    Дата: <%= order.created_at.strftime("%d").to_s %> 
+    <%= set_month(order.created_at.strftime("%m").to_i) %> 
+    <%= order.created_at.strftime("%Y").to_s %> року о 
+    <%= order.created_at.strftime("%H:%M:%S").to_s %>
+  </p>
+</div>

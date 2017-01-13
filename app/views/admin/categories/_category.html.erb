@@ -1,0 +1,19 @@
+<div class="cat-item"> 
+  <%= category.name %> <span class="count">(Кількість продуктів: <%= category.products_count %>)</span>
+  <div class="action">
+    <%= link_to 'Переглянути', category %>  | 
+    <%= link_to 'Редагувати', modal_admin_category_path(category), method: :put, remote: true %> | 
+    <%= link_to 'Видалити', admin_category_path(category), method: :delete, remote: true, data: { confirm: "Ви впевнені?" } %>
+  </div>
+</div>
+
+<% category.children.each do |child| %>
+<div class="cat-nested-item"> 
+  <%= child.name %> <span class="count">(Кількість продуктів: <%= child.products_count %>)</span>
+  <div class="action">
+    <%= link_to 'Переглянути', child %>  | 
+    <%= link_to 'Редагувати', modal_admin_category_path(child), method: :put, remote: true %> | 
+    <%= link_to 'Видалити', admin_category_path(child), method: :delete, remote: true, data: { confirm: "Ви впевнені?" } %>
+  </div>
+</div>
+<% end %>  

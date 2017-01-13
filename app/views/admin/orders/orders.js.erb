@@ -1,0 +1,2 @@
+$("#orders_list").html("<%= escape_javascript(render @orders) %>");
+$('#orders_list').append('<%= escape_javascript(paginate @orders, remote: true) %>');
