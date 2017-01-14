@@ -1,0 +1,16 @@
+# added new dependencies
+dependencies:
+  pre: 
+    - sudo apt-get update; sudo apt-get install redis-server -y;
+    - gem install bundler
+  post: 
+    - bundle install
+
+machine:
+  ruby:
+    version: ruby-2.3.1
+
+test:
+  pre:
+    - bundle exec rackup faye.ru -s thin -E production -D
+    - redis-server --daemonize yes

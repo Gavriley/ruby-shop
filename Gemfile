@@ -65,6 +65,7 @@ end
 
 gem 'rails_12factor', group: :production
 
+gem 'thin'
 gem 'aasm'
 gem 'bootstrap-sass'
 gem 'cancancan'
