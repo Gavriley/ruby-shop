@@ -2,7 +2,7 @@
     <span class="action-block">
       <%= link_to 'Переглянути', product %>  | 
       <%= link_to 'Редагувати', edit_product_path(product) %> |
-      <%= link_to 'Видалити', admin_product_path(product), method: :delete, data: { confirm: "Ви впевнені?" } %>
+      <%= link_to 'Видалити', admin_product_path(product), method: :delete, id: 'delete_link', data: { confirm: "Ви впевнені?" } %>
     </span>
 
     <h2><%= product.title %></h2>

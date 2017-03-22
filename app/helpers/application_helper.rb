@@ -39,11 +39,11 @@ module ApplicationHelper
       cart_price = 0
     end
 
-    %(#{cart_count}шт. - #{@@helper.number_to_currency(cart_price, unit: ' грн.', separator: '.', delimiter: ' ', format: '%n %u')})
+    t('.price', item: cart_count, price: @@helper.number_to_currency(cart_price, locale: 'uk', separator: '.', delimiter: ' ', format: '%n %u'))
   end
 
   def get_title
-    'Shop' + (@title.present? ? " | #{@title}" : '')
+    t('.title') + (@title.present? ? " | #{@title}" : '')
   end
 
   def set_month(month)
@@ -91,16 +91,6 @@ module ApplicationHelper
       return ''
     else
       return "<span class='order-counter'>#{@orders_count}</span>".html_safe
-    end
-  end
-
-  def set_cart_params
-    if session[:cart_id]
-      @cart_count = Cart.find(session[:cart_id]).total_count
-      @cart_price = Cart.find(session[:cart_id]).total_price
-    else
-      @cart_count = 0
-      @cart_price = 0.00
     end
   end
 end

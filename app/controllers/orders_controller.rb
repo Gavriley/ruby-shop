@@ -2,9 +2,9 @@ require 'json'
 
 # top-level class documentation comment
 class OrdersController < ApplicationController
-  load_and_authorize_resource
-  skip_before_filter :verify_authenticity_token
-  before_action :set_order, only: [:show, :create_stripe]
+  load_and_authorize_resource except: [:liqpay_response, :paypal_response, :stripe_response]
+  # skip_before_filter :verify_authenticity_token
+  before_action :set_order, only: [:show, :stripe_response]
   rescue_from AASM::InvalidTransition,
               with: -> {
                       redirect_to root_path,
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
 
   def liqpay_response
     order_params = JSON.parse(Base64.decode64(params['data']))
-    @order = Order.find(order_params['order_id'].delete('order_count_'))
+    @order = Order.find(order_params['order_id'].split(', ').first)
     if order_params['err_description']
       @order.last_error =
         order_params['err_description']
@@ -56,10 +56,13 @@ class OrdersController < ApplicationController
              "В оплаті заказу №#{@order.id} сталася помилка #{@order.get_last_error}"
            )
     end
+
+    render nothing: true
   end
 
-  def paypal_response
-    @order = Order.find(params[:invoice])
+  def paypal_response    
+    invoice = params[:invoice].split(', ')
+    @order = Order.find(invoice.first)
     @order.update_column(:pay_with, 'PayPal')
 
     case params[:payment_status]
@@ -70,12 +73,14 @@ class OrdersController < ApplicationController
       @order.failure!
       Order.pay_logger.error("В оплаті заказу №#{@order.id} сталася помилка")
     end
+
+    render nothing: true
   end
 
   def stripe_response
     create_stripe
     Order.pay_logger.info("Заказ №#{@order.id} успішно оплачений")
-    redirect_to root_path, notice: 'Товари успішно оплачені'
+    redirect_to products_path, notice: 'Товари успішно оплачені'
   rescue => error
     @order.last_error = error.message
     @order.failure!
@@ -118,7 +123,6 @@ class OrdersController < ApplicationController
     charge = Stripe::Charge.create(
       customer: customer.id,
       amount: @order.amount * 100,
-      # amount: -1000,
       description: "Заказ №#{@order.id}",
       currency: 'UAH'
     )
@@ -132,10 +136,9 @@ class OrdersController < ApplicationController
       action: 'pay',
       sandbox: '1',
       amount: @order.amount,
-      # amount: -1000,
       currency: 'UAH',
       description: "Заказ №#{@order.id}",
-      order_id: "order_count_#{@order.id}",
+      order_id: "#{@order.id}, #{@order.created_at.strftime("%H:%M:%S").to_s}",
       version: '3',
       server_url: liqpay_response_orders_url
     }
@@ -149,13 +152,7 @@ class OrdersController < ApplicationController
       cmd: '_cart',
       upload: 1,
       notify_url: paypal_response_orders_url,
-
-      # amount_6: -10000,
-      # item_name_6: 'Test Product',
-      # item_number_6: 9999,
-      # quantity_6: 1,
-
-      invoice: @order.id
+      invoice: "#{@order.id}, #{@order.created_at.strftime("%H:%M:%S").to_s}"
     }
 
     @order.line_items.each_with_index do |item, index|

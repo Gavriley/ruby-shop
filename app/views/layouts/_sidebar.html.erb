@@ -13,14 +13,14 @@
     
     <% if user_signed_in? %>
     <div class="account">
-      <p>Ви ввійшли як <span><%= current_user.login %></span></p>
+      <p><%= t('.logged_in') %> <span><%= current_user.login %></span></p>
       <hr>
     </div>
     <% end %>
     
     <% if @categories.any? %>
     <div class="category-block">
-      <h1>Категорії</h1>
+      <h1><%= t('.categories') %></h1>
       <ul id="category_list">
         <% @categories.each do |category| %>
         <li>

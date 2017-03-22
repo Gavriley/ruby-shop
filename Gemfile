@@ -40,10 +40,11 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'ngrok-tunnel'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'headless'
+  gem 'rspec-retry'
   gem 'rspec-rails', '~>3.5'
 end
 
@@ -58,6 +59,7 @@ group :development do
 end
 
 group :test do
+  gem 'ngrok-rspec'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'simplecov', require: false

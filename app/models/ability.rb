@@ -32,7 +32,6 @@ class Ability
 
     can :read, Product do |product| product.published == true || product.user == @ability_user end
     can :create, Product
-    can :valid_avatar, Product
     can :update, Product, user: @ability_user
     can :destroy, Product, user: @ability_user
   end
@@ -65,9 +64,6 @@ class Ability
 
     can :read, Order
     can :create, Order
-    can :liqpay_response, Order
-    can :paypal_response, Order
-    can :stripe_response, Order
     can :modal, Order
 
     can :read, Comment

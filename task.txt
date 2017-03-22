@@ -153,20 +153,57 @@ Question:
 /*****************! Next Task(27.12.2016) !*****************/  
 
 Tests:
-  ? timecop clean card after one week
+  - timecop clean card after one week
   + Circle CI config ruby version 
   + test in Postgres or MySQL
-  cover controllers and models
+  - cover controllers and models
 
 Task: 
-  caspirano(doployed heroku) 
+  + doployed heroku 
   + rails server change puma 
-  ? config puma with nginx
-  i18n
+  + config puma with nginx
+  + i18n
+  - caspirano
 
 Resource:
   trank.com.ua  
   rubygarage.github.io
 
-Question: 
+Questions: 
   click in rspec  
+  test sidekiq
+  test admin panel
+
+/*****************! Next Task(01.02.2017) !*****************/  
+
+Task:
+  Old project:
+    + Test Sidekiq
+    + Config nginx
+    + wait until el is visible
+    + cover controllers and models
+    + Capistrano 
+
+  New project:  
+    + Вхід по компанії і гість
+    + Придумати редагування порядку записів
+    Вхід і реєстрація черех соц. мережі
+    Загрузка відео
+    Формування екселівського файлу
+    Оптимізація зображення при загрузці
+
+Questions:
+  + dont test user model and helpers
+  + event for upload file 
+  + callback from pay 
+
+/*****************! Next Task(27.02.2017) !*****************/   
+Development:  
+  deploy shop
+  capistrano-puma
+  chef 
+  redis-rails caching
+
+
+Read:  
+  little redis book 

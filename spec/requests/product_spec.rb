@@ -21,6 +21,11 @@ describe 'Product', type: :feature, js: true do
     fill_in 'Введіть заголовок',
             with: title
     fill_in 'Введіть ціну', with: price
+
+    within '#file_block' do
+      page.attach_file('thumbnail', File.absolute_path('./spec/fixtures/test.jpg'), visible: false)
+    end
+    
     click_button 'Створити товар'
     expect(page).to have_content 'Товар успішно створений'
   end
@@ -49,8 +54,14 @@ describe 'Product', type: :feature, js: true do
   it 'incorrect price' do
     fill_in 'Введіть заголовок',
             with: title
-    fill_in 'Введіть ціну', with: -1
+    fill_in 'Введіть ціну', with: price
     click_button 'Створити товар'
+
+    expect(page).to have_content 'Товар успішно створений'
+
+    fill_in 'Введіть ціну', with: -1
+    click_button 'Оновити товар' 
+    
     expect(page).to have_content 'Введіть коректну ціну'
   end
 
@@ -60,8 +71,9 @@ describe 'Product', type: :feature, js: true do
     fill_in 'Введіть ціну', with: price
     click_button 'Створити товар'
 
-    fill_in 'Введіть ціну',
-            with: 5000
+    expect(page).to have_content 'Товар успішно створений'
+    
+    fill_in 'Введіть ціну', with: 5555
     click_button 'Оновити товар'        
     expect(page).to have_content 'Товар успішно оновлено'
   end
@@ -74,7 +86,7 @@ describe 'Product', type: :feature, js: true do
 
     click_link 'Переглянути товар'
     click_link 'Видалити'
-    sleep 1
+    sleep 0.2
     page.driver.browser.switch_to.alert.accept
 
     expect(page).to have_content 'Товар знищено'
@@ -95,4 +107,31 @@ describe 'Product', type: :feature, js: true do
       expect(page).to have_content 'Недостатньо прав для здійснення даної дії'
     end
   end
+
+  context 'upload thumbnail' do
+    it 'overflow size' do
+      within '#file_block' do
+        page.attach_file('thumbnail', File.absolute_path('./spec/fixtures/overflow.jpg'), visible: false)
+      end
+
+      expect(page).to have_content 'Максимальний розмір мініатюри 1 мегабайт'
+    end  
+
+    it 'incorrect format' do
+      within '#file_block' do
+        page.attach_file('thumbnail', File.absolute_path('./spec/fixtures/text.txt'), visible: false)
+      end
+
+      expect(page).to have_content 'Некоректний формат мініатюри'
+    end  
+
+    it 'correct thumbnail' do
+      within '#file_block' do
+        page.attach_file('thumbnail', File.absolute_path('./spec/fixtures/test.jpg'), visible: false)
+      end
+
+      expect(page).to have_no_content 'Максимальний розмір мініатюри 1 мегабайт'
+      expect(page).to have_no_content 'Некоректний формат мініатюри'
+    end  
+  end  
 end

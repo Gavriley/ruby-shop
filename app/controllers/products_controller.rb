@@ -1,6 +1,6 @@
 # top-level class documentation comment
 class ProductsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :valid_thumbnail
 
   include ApplicationHelper
 
@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
       render json: { errors: get_error_messages(@product) },
              status: :unprocessable_entity
     end
-  end
+  end  
 
   private
 

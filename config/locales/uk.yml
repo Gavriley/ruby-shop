@@ -1,4 +1,22 @@
 uk:
+  layouts:
+    application:
+      title: "Магазин"
+    header:  
+      home: "Головна"
+      office: "Кабінет"
+      create_product: "Створити товар"
+      logout: "Вихід"
+      registration: "Реєстрація"
+      login: "Вхід"
+      search: "Пошук"
+    sidebar:
+      logged_in: "Ви увійшли як"
+      price: "%{item} шт. - %{price}" 
+      categories: "Категорії"
+  products:
+    index:
+      to_cart: 'до корзини'    
   views:
     pagination:
       first: "&laquo;"
@@ -6,3 +24,13 @@ uk:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "&hellip;"
+  line_items:
+    create:
+      price: "%{item} шт. - %{price}"
+    count:             
+      price: "%{item} шт. - %{price}"
+    destroy:             
+      price: "%{item} шт. - %{price}"  
+  carts: 
+    clean:    
+      price: "%{item} шт. - %{price}"

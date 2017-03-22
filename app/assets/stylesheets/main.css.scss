@@ -440,15 +440,36 @@ body.general-block {
         border-radius: 5px;
         background-color: #416ea7;
         margin-left: 10px;
-        margin-right: 50px
+        margin-right: 20px
     }
     input[type=submit]:hover {
         background-color: #869cb7
     }
+
+    .choose-lan {
+        float: right;
+        margin-top: 8px;
+        font-size: 14px;
+        color: #fff;
+
+        label {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        label:hover {
+            cursor: pointer;
+        }
+
+        input[type=radio] {
+            display: none;
+        }
+    }
+
     .search-results {
         display: none;
         top: 33px;
-        right: 157px;
+        right: 175px;
         position: absolute;
         width: 302px;
         background: #fff;

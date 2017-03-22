@@ -15,8 +15,8 @@
             <% end %>  
             <div class="product-info">
               <%= link_to product.title, product_path(product) %>
-              <h3><%= number_to_currency(product.price, unit: " грн.", separator: ".", delimiter: " ", format: "%n %u") %></h3>
-              <%= link_to 'До корзини', line_items_path(product_id: product), method: :post, remote: true, class: 'button-cart' %>
+              <h3><%= number_to_currency(product.price, separator: ".", delimiter: " ", format: "%n %u", locale: 'uk') %></h3>
+              <%= link_to t('.to_cart'), line_items_path(product_id: product), method: :post, remote: true, class: 'button-cart' %>
             </div>  
           </div>
         </div>

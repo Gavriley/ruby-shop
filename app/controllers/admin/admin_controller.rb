@@ -5,10 +5,13 @@ module Admin
 
     protect_from_forgery with: :exception
 
-    rescue_from ActiveRecord::RecordNotFound,
-                with: -> { redirect_to admin_root_path }
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     before_action :verify_admin
+
+    def not_found
+      render file: 'public/404.html', status: :not_found, layout: false
+    end 
 
     private
 

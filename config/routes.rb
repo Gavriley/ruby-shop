@@ -7,9 +7,11 @@ Rails.application.routes.draw do
          to: 'users/registrations#valid_avatar', as: 'valid_avatar'
   end
 
+  # post 'products/valid_thumbnail', to: 'products#valid_thumbnail'
+
   resources :products do
-    post 'valid_thumbnail', to: 'products#valid_thumbnail',
-                            as: 'valid_thumbnail', on: :collection
+    post 'valid_thumbnail', to: 'products#valid_thumbnail', as: 'valid_thumbnail', on: :collection
+
     post 'search', to: 'products#search',
                    as: 'search', on: :collection
 
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  
+  
   resources :categories, only: :show
 
   resources :line_items, only: [:create, :destroy] do
@@ -40,9 +44,7 @@ Rails.application.routes.draw do
                             as: 'stripe_response', on: :member
     put 'modal', to: 'orders#modal', on: :collection
   end
-
-  root 'products#index'
-
+    
   namespace :admin do
     root 'products#dashboard'
 
@@ -65,6 +67,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :destroy, :show]
   end
 
+  scope '(:locale)' do
+    root 'products#index', via: :all 
+  end
+  
   # mount Sidekiq::Web, at: '/sidekiq'
 
   get '*any', via: :all, to: 'application#not_found'

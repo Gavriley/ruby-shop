@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
     self.only_thumbnail = true
   end
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :line_items, dependent: :destroy
   has_many :categories_products
   has_many :categories, through: :categories_products

@@ -97,6 +97,7 @@ GEM
     concurrent-ruby (1.0.4)
     connection_pool (2.2.1)
     cookiejar (0.3.3)
+    daemons (1.2.4)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -179,6 +180,11 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.0.1)
     netrc (0.11.0)
+    ngrok-rspec (1.1.18)
+      capybara (>= 2.4)
+      ngrok-tunnel (~> 2.0)
+      rspec (>= 2.99)
+    ngrok-tunnel (2.1.0)
     nokogiri (1.7.0)
       mini_portile2 (~> 2.1.0)
     options (2.3.2)
@@ -250,6 +256,10 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -266,6 +276,8 @@ GEM
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
+    rspec-retry (0.5.3)
+      rspec-core (> 3.3, < 3.6)
     rspec-support (3.5.0)
     rubocop (0.46.0)
       parser (>= 2.3.1.1, < 3.0)
@@ -314,6 +326,10 @@ GEM
       net-ssh (>= 2.8.0)
     stripe (1.57.1)
       rest-client (>= 1.4, < 4.0)
+    thin (1.5.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -370,6 +386,8 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   liqpay!
+  ngrok-rspec
+  ngrok-tunnel
   paperclip (~> 5.0.0)
   paperclip-i18n
   paypal-sdk-rest
@@ -381,6 +399,7 @@ DEPENDENCIES
   rails_12factor
   remotipart (~> 1.2)
   rspec-rails (~> 3.5)
+  rspec-retry
   rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -389,6 +408,7 @@ DEPENDENCIES
   simplecov
   spring
   stripe
+  thin
   timecop
   turbolinks
   uglifier (>= 1.3.0)

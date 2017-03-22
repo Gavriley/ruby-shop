@@ -1,7 +1,7 @@
 <div class="order-item" <%= 'id=unverified' if order.unverified %>>
   <div class="action-block">
     <%= link_to 'Переглянути', admin_order_path(order) %> | 
-    <%= link_to 'Видалити', admin_order_path(order), method: :delete, data: { confirm: "Ви впевнені?" } %>
+    <%= link_to 'Видалити', admin_order_path(order), method: :delete, id: 'delete_link', data: { confirm: "Ви впевнені?" } %>
   </div>
   <p>Імя замовника: <%= order.name %></p>
   <p>Email замовника: <%= order.email %></p>
